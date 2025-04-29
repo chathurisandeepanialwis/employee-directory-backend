@@ -10,16 +10,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/employee")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 
 public class EmployeeController {
-    private final EmployeeController employeeController;
+    private final EmployeeService employeeService;
 
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public String addEmployee (@RequestBody Employee employee) {
-        boolean isAdded = EmployeeService.addEmployee(employee);
+        boolean isAdded = employeeService.addEmployee(employee);;
         if (isAdded) {
             return "Employee added successfully!";
         } else {
@@ -27,9 +27,9 @@ public class EmployeeController {
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{employee_id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String updateEmployee (@RequestBody Employee employee, @PathVariable Integer id) {
+    public String updateEmployee (@RequestBody Employee employee, @PathVariable Integer employee_id) {
         boolean isUpdated = employeeService.updateEmployee(employee, employee_id);
         if (isUpdated) {
             return "Employee updated successfully!";
@@ -53,10 +53,10 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get/{employee_id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Employee searchEmployee (@PathVariable Integer id) {
-        return employeeService.searchEmployee(id);
+    public Employee searchEmployee (@PathVariable Integer employee_id) {
+        return employeeService.searchEmployee(employee_id);
     }
 
 
