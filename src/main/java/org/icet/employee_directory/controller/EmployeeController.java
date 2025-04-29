@@ -12,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:5173")
 
+
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -43,6 +44,12 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+//    @GetMapping
+//    public ResponseEntity<List<Employee>> getAllEmployees() {
+//        List<Employee> employees = employeeService.getAllEmployees();
+//        return new ResponseEntity<>(employees, HttpStatus.OK);
+//    }
+
     @DeleteMapping("/delete/{employee_id}")
     public String deleteEmployee (@PathVariable Integer employee_id) {
         boolean isDeleted = employeeService.deleteEmployee(employee_id);
@@ -58,6 +65,8 @@ public class EmployeeController {
     public Employee searchEmployee (@PathVariable Integer employee_id) {
         return employeeService.searchEmployee(employee_id);
     }
+
+
 
 
 
